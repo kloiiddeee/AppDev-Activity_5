@@ -1,0 +1,106 @@
+body {
+  margin: 0; 
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; 
+  background-image: url('../image/bc.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  color: #333; 
+  line-height: 1.6; 
+}
+
+nav {
+  background-color: black;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  color: white;
+  font-size: 35px;
+  margin: 0;
+}
+
+nav .search-container {
+  flex-grow: 1; 
+  display: flex;
+  justify-content: center; 
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"] {
+  width: 300px; 
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #05f742;
+  border-left: none;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  color: white;
+}
+
+button:hover {
+  background-color: #0ea146;
+}
+
+.container {
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 800px; /* Centering the content */
+}
+
+h1 {
+  color:#fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.song-list {
+  list-style-type: none; 
+  padding: 0;
+}
+
+.song-item {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.song-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.song-item a:hover {
+  text-decoration: underline;
+}
+
+.back-home {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #05f742;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back-home:hover {
+  text-decoration: underline;
+}

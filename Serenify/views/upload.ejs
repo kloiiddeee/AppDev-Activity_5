@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/update.css">
+</head>
+<body>
+    <nav class="content">
+        <h1>Serenify <i class="bi bi-music-note-beamed"></i></h1>
+    </nav>
+
+    <div class="upload-form">
+        <h1>Upload Your Song</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="albumCover">Upload Album Cover:</label>
+            <input type="file" name="albumCover" id="albumCover" accept="image/*">
+            <br><br>
+            <label for="mp3file">Upload MP3 File:</label>
+            <input type="file" name="mp3file" id="mp3file" accept="audio/mp3" required>
+            <br><br>
+            <label for="songName">Song Name:</label>
+            <input type="text" name="songName" id="songName" required>
+            <br><br>
+            <label for="artistName">Artist:</label>
+            <input type="text" name="artistName" id="artistName" required>
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+  </body>
+</html>

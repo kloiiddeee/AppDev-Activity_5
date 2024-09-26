@@ -1,0 +1,74 @@
+body{
+    margin: 0; 
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; 
+    background-image: url('../image/bc.jpg'); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    color: #333; 
+    line-height: 1.6; 
+  }
+
+nav{
+    background-color: black;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ nav h1 {
+    color: white;
+    font-size: 35px;
+    margin: 0;
+  }
+
+.upload-form {
+    margin-top: 3%;
+    margin-left: 35%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+  label {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  input[type="text"], input[type="file"] {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-image: linear-gradient(to right, #f85032, #f1c40f);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-image: linear-gradient(to right, #f1c40f, #f85032);
+  }
+  
+  br {
+    display: none;
+  }

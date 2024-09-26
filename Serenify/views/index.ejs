@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+  <nav>
+    <h1>Serenify <i class="bi bi-music-note-beamed"></i></h1>
+    <form action="/search" method="GET">
+        <input type="text" name="q" placeholder="What do you want to play?" required>
+        <button type="submit"><i class="bi bi-search"></i></button>
+    </form>
+    <a href="/upload">Upload <i class="bi bi-upload"></i></a>
+</nav>
+
+<!-- Song Library Section -->
+<div class="song-library">
+    <h2>Song Library</h2>
+    <ul>
+        <% songs.forEach((song, index) => { %>
+            <li data-index="<%= index %>" class="library-song">
+                <span class="library-song-title"><%= song.songName %></span> - <span class="library-artist"><%= song.artistName %></span>
+            </li>
+        <% }); %>
+    </ul>
+</div>
+
+<div class="player-container">
+    <% songs.forEach((song, index) => { %>
+        <div class="player-info" data-index="<%= index %>">
+            <img src="/uploads/<%= song.albumCover %>" alt="Album Cover of <%= song.songName %>" class="album-cover">
+            <div class="song-details">
+                <div class="song-title"><%= song.songName %></div>
+                <div class="artist"><%= song.artistName %></div>
+            </div>
+            <audio class="audio-player" src="/uploads/<%= song.mp3file %>" preload="metadata"></audio>
+        </div>
+    <% }); %>
+    
+    <div class="playback-bar">
+        <div id="playback-bar-progress" class="playback-bar-progress" style="width: 0%;"></div>
+    </div>
+    <div class="controls">
+        <div class="control-buttons">
+            <button id="prev-btn" class="control-button"><i class="bi bi-skip-backward"></i></button>
+            <button id="play-pause-btn" class="control-button"><i class="bi bi-play"></i><i class="bi bi-pause" style="display:none;"></i></button>
+            <button id="next-btn" class="control-button"><i class="bi bi-skip-forward"></i></button>
+        </div>
+    </div>           
+</div>
+
+<script>
+    const audioPlayers = document.querySelectorAll('.audio-player');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playbackBarProgress = document.getElementById('playback-bar-progress');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const librarySongs = document.querySelectorAll('.library-song');
+
+    let currentIndex = 0;
+    let isPlaying = false;
+
+    function updateAudioSource(index) {
+        audioPlayers.forEach((player, idx) => {
+            if (idx === index) {
+                player.play();
+            } else {
+                player.pause();
+            }
+        });
+        updatePlayPauseButton();
+    }
+
+    function updatePlayPauseButton() {
+        if (isPlaying) {
+            playPauseBtn.querySelector('.bi-play').style.display = 'none';
+            playPauseBtn.querySelector('.bi-pause').style.display = 'inline';
+        } else {
+            playPauseBtn.querySelector('.bi-play').style.display = 'inline';
+            playPauseBtn.querySelector('.bi-pause').style.display = 'none';
+        }
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+        const currentAudio = audioPlayers[currentIndex];
+        if (isPlaying) {
+            currentAudio.pause();
+        } else {
+            currentAudio.play();
+        }
+        isPlaying = !isPlaying;
+        updatePlayPauseButton();
+    });
+
+    audioPlayers.forEach((player, index) => {
+        player.addEventListener('timeupdate', () => {
+            const percentage = (player.currentTime / player.duration) * 100;
+            playbackBarProgress.style.width = percentage + '%';
+        });
+        player.addEventListener('ended', () => {
+            nextBtn.click(); // Automatically go to the next song when one ends
+        });
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateAudioSource(currentIndex);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < audioPlayers.length - 1) {
+            currentIndex++;
+            updateAudioSource(currentIndex);
+        }
+    });
+
+    // Add event listeners to the library songs
+    librarySongs.forEach((song) => {
+        song.addEventListener('click', (event) => {
+            currentIndex = parseInt(event.currentTarget.getAttribute('data-index'));
+            updateAudioSource(currentIndex);
+            isPlaying = true; // Set to true to ensure play/pause button reflects play state
+            updatePlayPauseButton();
+        });
+    });
+
+    // Initialize the first audio track
+    updateAudioSource(currentIndex);
+</script>
+</body>
+</html>

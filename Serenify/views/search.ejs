@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenify</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="/search.css">
+</head>
+<body>
+  <nav class="content">
+    <h1>Serenify <i class="bi bi-music-note-beamed"></i></h1>
+  </nav>
+
+  <div class="container">
+    <h1>Search Results</h1>
+    <ul class="song-list">
+        <% if (songs.length > 0) { %>
+            <% songs.forEach(function(song) { %>
+                <li class="song-item">
+                    <a href="/uploads/<%= song.mp3file %>" target="_blank">
+                        <span class="song-name"><%= song.songName %></span> by <span class="artist-name"><%= song.artistName %></span>
+                    </a>
+                    <audio controls>
+                        <source src="/uploads/<%= song.mp3file %>" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </li>
+            <% }) %>
+        <% } else { %>
+            <li>No songs found</li>
+        <% } %>
+    </ul>
+    <a href="/" class="back-home">Back to Home</a>
+</div>
+
+  
+</body>
+</html>
